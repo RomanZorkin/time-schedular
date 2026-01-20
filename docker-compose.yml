@@ -1,4 +1,4 @@
-version: '3.3'
+version: '3'
 
 services:
   scheduler:
@@ -10,9 +10,8 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 60s
     volumes:
-      - ./logs:/app/logs:delegated
+      - ./logs:/app/logs
     environment:
       - PYTHONUNBUFFERED=1
 
