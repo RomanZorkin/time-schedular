@@ -8,8 +8,8 @@ RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 # Установка uv (в /root/.local/bin/uv) и добавление в PATH
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh && ln -s /root/.local/bin/uv /usr/local/bin/uv
 
-# Копируем описание проекта и ставим зависимости через uv
-COPY pyproject.toml .
+# Копируем описание проекта и lock-файл и ставим зависимости через uv
+COPY pyproject.toml uv.lock /app/
 RUN uv sync --frozen --no-dev
 
 # Копируем исходный код приложения
