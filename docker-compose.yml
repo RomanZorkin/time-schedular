@@ -1,0 +1,18 @@
+version: '3.3'
+
+services:
+  scheduler:
+    build: .
+    container_name: reliable-scheduler
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "uv run python -c 'import schedule; print(\"OK\")' || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    volumes:
+      - ./logs:/app/logs:delegated
+    environment:
+      - PYTHONUNBUFFERED=1
+
